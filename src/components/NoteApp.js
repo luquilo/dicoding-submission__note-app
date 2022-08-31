@@ -20,7 +20,6 @@ class NoteApp extends React.Component {
             <div className="note-app">
                 <NoteNavBar />
                 <div className="note-app__body">
-                    
                     <NoteInput />
                     <NotesList />
                 </div>                

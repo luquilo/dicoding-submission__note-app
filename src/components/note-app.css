@@ -1,69 +1,113 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  p {
-    font-size: 100px;
-    color: pink;
-  }
+  margin: 0;
+  padding: 0;
+}
 
-  .note-app__body {
-    max-width: 1000px;
-    margin: 16px auto;
-    padding: 12px;
-  }
-  
-  /* component navbar.js */
-  .note-app__NavBar {
-    font-size: 20px;
-    font-weight: 700;
-    border-bottom: 3px dotted black;
-    padding: 10px;
-  }
-  
-  .note-app__NavBar p {
-    display: inline;
-    font-size: 20px;
-  }
-  
-  .note-input {
-    margin: 10px auto;
-    width: 500px;
-    margin-bottom: 48px;
-  }
-  
-  .note-input__title {
-    font-weight: bold;
-    font-size: 50px;
-    text-align: left;
-  }
-  
-  .note-input__input {
-    display: block;
-    width: 100%;
-    max-width: 500px;
-    padding: 10px 0;
-    margin: 5px 0;
-  }
-  
-  .note-input__textArea {
-    display: block;
-    width: 100%;
-    padding: 10px 0;
-    margin: 5px 0;
-  }
-  
-  .note-input button {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    background-color: transparent;
-    font-family: "Inter", sans-serif;
-    color: black;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
+body {
+  background-color: #808080;
+  color: white;
+}
+
+p {
+  font-size: 100px;
+  color: yellow;
+}
+
+.note-app__body {
+  max-width: 1000px;
+  margin: 16px auto;
+  padding: 12px;
+}
+
+/* component navbar.js */
+.note-app__NavBar {
+  font-size: 20px;
+  font-weight: 700;
+  border-bottom: 3px dotted black;
+  padding: 10px;
+}
+
+.note-app__NavBar p {
+  display: inline;
+  font-size: 20px;
+}
+
+.note-input {
+  margin: 10px auto;
+  width: 500px;
+  margin-bottom: 48px;
+}
+
+.note-input__title {
+  font-weight: bold;
+  font-size: 50px;
+  text-align: left;
+}
+
+.note-input__input {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.note-input__textArea {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.note-input button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background-color: transparent;
+  font-family: "Inter", sans-serif;
+  color: black;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.note-item {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin: 15px;
+}
+
+.note-item-data {
+  text-align: center;
+}
+
+.note-item-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.note-item__delete-button {
+  cursor: pointer;
+  color: red;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.note-item__arsipkan-button {
+  cursor: pointer;
+  color: orange;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.note-list__container {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin: 10px;
+}
