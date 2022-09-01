@@ -8,11 +8,6 @@ body {
   color: white;
 }
 
-p {
-  font-size: 100px;
-  color: yellow;
-}
-
 .note-app__body {
   max-width: 1000px;
   margin: 16px auto;
