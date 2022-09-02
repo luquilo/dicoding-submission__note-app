@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  color: black;
 }
 
 body {
@@ -8,10 +9,29 @@ body {
   color: white;
 }
 
+.arsip-title h2 {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+
+.catatan-aktif__title {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+
 .note-app__body {
   max-width: 1000px;
   margin: 16px auto;
   padding: 12px;
+}
+
+.note-app__body h2 {
+  font-weight: normal;
+  margin: 16px 0;
 }
 
 /* component navbar.js */
@@ -31,6 +51,14 @@ body {
   margin: 10px auto;
   width: 500px;
   margin-bottom: 48px;
+}
+
+.note-input form textarea {
+  min-height: 150px;
+}
+
+.note-input__body {
+  min-height: 175px;
 }
 
 .note-input__title {
@@ -69,14 +97,33 @@ body {
   cursor: pointer;
 }
 
+.notes-list {
+  display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(min-content, max-content);
+    gap: 16px;
+    margin-bottom: 48px;
+}
+
 .note-item {
-  display: flex;
-  flex-direction: column;
-  width: 25%;
-  margin: 15px;
+  border: 1px solid #aaa;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .note-item-data {
+  text-align: center;
+  padding: 20px;
+}
+
+.note-item-data p, .note-item-data button {
+  padding: 20px;
+  margin: 5px;
+}
+
+.note-item h1 {
   text-align: center;
 }
 
@@ -98,11 +145,4 @@ body {
   color: orange;
   padding: 10px;
   border-radius: 5px;
-}
-
-.note-list__container {
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
-  margin: 10px;
 }

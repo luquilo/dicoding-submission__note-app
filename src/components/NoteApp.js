@@ -1,76 +1,160 @@
 import React from "react";
-import './note-app.css';
+import "./note-app.css";
 import NoteNavBar from "./noteNavBar";
 import { NoteInput } from "./NoteInput";
 import { NotesList } from "./NotesList";
+import { getInitialData } from "./initialData";
+import { EmptyNoteMessage } from "./emptyNoteMessage";
 
 class NoteApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            getInitialData: [
-                {
-                    id: 1,
-                    title: "Babel",
-                    body: "Babel merupakan tools open-source yang digunakan untuk mengubah sintaks ECMAScript 2015+ menjadi sintaks yang didukung oleh JavaScript engine versi lama. Babel sering dipakai ketika kita menggunakan sintaks terbaru termasuk sintaks JSX.",
-                    createdAt: "2022-04-14T04:27:34.572Z",
-                    archived: false,
-                },
-                {
-                    id: 2,
-                    title: "Functional Component",
-                    body: "Functional component merupakan React component yang dibuat menggunakan fungsi JavaScript. Agar fungsi JavaScript dapat disebut component ia harus mengembalikan React element dan dipanggil layaknya React component.",
-                    createdAt: "2022-04-14T04:27:34.572Z",
-                    archived: false,
-                },
-                {
-                    id: 3,
-                    title: "Modularization",
-                    body: "Dalam konteks pemrograman JavaScript, modularization merupakan teknik dalam memecah atau menggunakan kode dalam berkas JavaScript secara terpisah berdasarkan tanggung jawabnya masing-masing.",
-                    createdAt: "2022-04-14T04:27:34.572Z",
-                    archived: false,
-                },
-                {
-                    id: 4,
-                    title: "Lifecycle",
-                    body: "Dalam konteks React component, lifecycle merupakan kumpulan method yang menjadi siklus hidup mulai dari component dibuat (constructor), dicetak (render), pasca-cetak (componentDidMount), dan sebagainya. ",
-                    createdAt: "2022-04-14T04:27:34.572Z",
-                    archived: false,
-                },
-                {
-                    id: 5,
-                    title: "ESM",
-                    body: "ESM (ECMAScript Module) merupakan format modularisasi standar JavaScript.",
-                    createdAt: "2022-04-14T04:27:34.572Z",
-                    archived: false,
-                },
-                {
-                    id: 6,
-                    title: "Module Bundler",
-                    body: "Dalam konteks pemrograman JavaScript, module bundler merupakan tools yang digunakan untuk menggabungkan seluruh modul JavaScript yang digunakan oleh aplikasi menjadi satu berkas.",
-                    createdAt: "2022-04-14T04:27:34.572Z",
-                    archived: false,
-                },
-            ]
-        }
-        
+  constructor(props) {
+    super(props);
+    //inisiasi state
+    this.state = {
+      data: [],
+      newNote: {
+        judul: "",
+        noteValue: "",
+      },
+    };
+    //harus bind handler untuk akses this pada handler
+    this.OnSubmitHandler = this.OnSubmitHandler.bind(this);
+  }
+
+
+  //megambil data dari utils/getInitialData
+  componentDidMount() {
+    const data = getInitialData();
+    this.setState((previousState) => {
+      return {
+        ...previousState,
+        data,
+      };
+    });
+  }
+
+  //fungsi-fungsi untuk memperbarui state
+
+  //handler menambahkan note dari form ke state menggunakan set state
+  OnSubmitHandler() {
+    const { newNote } = this.state;
+    const dataNote = {
+      id: +new Date(),
+      title: newNote.judul,
+      body: newNote.noteValue,
+      createdAt: new Date().toISOString(),
+      archived: false,
+    };
+
+    //menggunakan setState untuk memerbarui data pada state
+    const newDataNotes = this.state.data.concat(dataNote);
+    this.setState({
+      data: newDataNotes,
+      newNotes: {
+        title: "",
+        note: "",
+      },
+    });
+  }
+
+  //handler untuk title note
+  onChangeTitleHandler = (title) => {
+    this.setState((previousState) => {
+      return {
+        ...previousState,
+        newNotes: {
+          ...previousState.newNotes,
+          title: title,
+        },
+      };
+    });
+  };
+
+  //handler untuk value dari note
+  onChangeNotesHandler = (newNoteValue) => {
+    this.setState((previousState) => {
+      return {
+        ...previousState,
+        newNotes: {
+          ...previousState.newNotes,
+          note: newNoteValue,
+        },
+      };
+    });
+  };
+
+
+  //handler menghapus note
+  onDeleteHandler = (id) => {
+    // const deleteConfirm = window.confirm(
+    //   "Kamu yakin akan menghapus data catatan?"
+    // );
+    if (true) {
+      const index = this.findIndexNote(id);
+      const deletedData = this.state.data;
+      deletedData.splice(index, 1);
+      //menggunakan splice untuk menghapus note
+
+      this.setState((previousState) => {
+        return {
+          ...previousState,
+          data: deletedData,
+        };
+      });
     }
+  };
 
-    //fungsi-fungsi untuk memperbarui state
+  // handler untuk merubah status arsip
+  onChangeStatusNote = (id, status) => {
+    const changedData = this.state.data.map((data) => {
+      if (data.id === id) {
+        return {
+          ...data,
+          archived: !status,
+        };
+      } else {
+        return data;
+      }
+    });
+    this.setState({ data: changedData });
+  };
 
-   
+  render() {
+    //status notes
+    let activeNotes = [];
+    let archivedNotes = [];
 
-    render() {
-        return (
-            <div className="note-app">
-                <NoteNavBar />
-                <div className="note-app__body">
-                    <NoteInput />
-                    <NotesList data={this.state} />
-                </div>
-            </div >
-        )
-    }
+    return (
+
+
+
+
+      <div className="note-app">
+        <NoteNavBar />
+        <div className="note-app__body">
+          <NoteInput 
+            OnSubmitHandler={(event)=>{
+              event.preventDefault();
+              this.OnSubmitHandler();
+            }}
+            onChangeNotesHandler={(val)=>this.onChangeNotesHandler(val.target.newNoteValue)}
+            valueForm={this.state.newNote}
+          />
+          <h2 className="catatan-aktif__title">Catatan aktif</h2>
+          <div className="notes-list">
+            {this.state.data.map((val) => {
+              return <NotesList data={val} />;
+            })}
+          </div>
+          <div className="arsip-title">
+            <h2>Arsip</h2>
+            <p><EmptyNoteMessage/></p>
+          </div>
+
+        </div>
+      </div>
+    );
+  }
 }
 
 export default NoteApp;
